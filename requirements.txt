@@ -61,7 +61,6 @@ tool
 tornado
 traitlets
 typing-extensions
-tzdat
 tzlocal
 urllib3
 validators
