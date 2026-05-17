@@ -31,19 +31,20 @@ st.markdown("""
 /* ── Reset & base ── */
 html, body, [class*="css"] {
     font-family: 'Syne', sans-serif;
-    background: #050a12;
-    color: #c9d8f0;
+    background: #0e0618;
+    color: #e8d9f5;
 }
 
-/* ── Animated grid background ── */
+/* ── Purple-gold grid background ── */
 [data-testid="stAppViewContainer"] {
     background:
-        linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px),
-        radial-gradient(ellipse at 20% 50%, rgba(0,80,160,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(0,200,140,0.10) 0%, transparent 50%),
-        #050a12;
-    background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
+        linear-gradient(rgba(180,120,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(180,120,255,0.04) 1px, transparent 1px),
+        radial-gradient(ellipse at 15% 60%, rgba(100,30,180,0.30) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 20%, rgba(160,80,0,0.22) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 90%, rgba(120,40,200,0.18) 0%, transparent 60%),
+        #0e0618;
+    background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%, 100% 100%;
 }
 
 [data-testid="stHeader"] { background: transparent; }
@@ -51,11 +52,11 @@ html, body, [class*="css"] {
 /* ── Hero title ── */
 .hero-title {
     font-family: 'Orbitron', monospace;
-    font-size: clamp(2rem, 5vw, 3.6rem);
+    font-size: clamp(8.8rem, 14vw, 14rem);
     font-weight: 900;
-    letter-spacing: .12em;
+    letter-spacing: .14em;
     text-align: center;
-    background: linear-gradient(135deg, #00f0ff 0%, #00ffaa 55%, #00c8ff 100%);
+    background: linear-gradient(135deg, #ffd700 0%, #ffaa00 40%, #c97bff 80%, #a855f7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -63,25 +64,27 @@ html, body, [class*="css"] {
     padding: 0;
     text-shadow: none;
     line-height: 1.15;
+    filter: drop-shadow(0 0 32px rgba(200,140,255,0.35));
 }
 .hero-sub {
     text-align: center;
-    font-size: 1rem;
-    letter-spacing: .25em;
+    font-size: 1.1rem;
+    letter-spacing: .3em;
     text-transform: uppercase;
-    color: #4a90b8;
-    margin-top: .4rem;
+    color: #c4a0e8;
+    margin-top: .6rem;
     margin-bottom: 2.5rem;
+    text-shadow: 0 0 20px rgba(180,100,255,0.4);
 }
 
 /* ── Glassmorphism card ── */
 .glass-card {
-    background: rgba(8, 22, 42, 0.75);
-    border: 1px solid rgba(0, 240, 255, 0.15);
+    background: rgba(20, 8, 40, 0.78);
+    border: 1px solid rgba(180, 120, 255, 0.18);
     border-radius: 16px;
     padding: 2rem 2.2rem;
     backdrop-filter: blur(12px);
-    box-shadow: 0 0 40px rgba(0,240,255,0.04), inset 0 1px 0 rgba(255,255,255,0.05);
+    box-shadow: 0 0 40px rgba(160,80,255,0.06), inset 0 1px 0 rgba(255,215,0,0.06);
     margin-bottom: 1.5rem;
 }
 
@@ -91,23 +94,23 @@ html, body, [class*="css"] {
     font-size: .7rem;
     letter-spacing: .3em;
     text-transform: uppercase;
-    color: #00c8ff;
+    color: #c97bff;
     margin-bottom: .6rem;
 }
 
 /* ── Text area override ── */
 textarea {
     background: rgba(0,20,40,0.8) !important;
-    border: 1px solid rgba(0,240,255,0.2) !important;
+    border: 1px solid rgba(180,120,255,0.25) !important;
     border-radius: 10px !important;
     color: #c9d8f0 !important;
     font-family: 'Syne', sans-serif !important;
     font-size: .95rem !important;
-    caret-color: #00f0ff;
+    caret-color: #ffd700;
 }
 textarea:focus {
-    border-color: rgba(0,240,255,0.6) !important;
-    box-shadow: 0 0 0 2px rgba(0,240,255,0.12) !important;
+    border-color: rgba(200,140,255,0.7) !important;
+    box-shadow: 0 0 0 2px rgba(180,100,255,0.18) !important;
 }
 
 /* ── Primary button ── */
@@ -120,15 +123,15 @@ textarea:focus {
     letter-spacing: .18em;
     text-transform: uppercase;
     color: #050a12 !important;
-    background: linear-gradient(135deg, #00f0ff, #00ffaa) !important;
+    background: linear-gradient(135deg, #ffd700, #c97bff) !important;
     border: none !important;
     border-radius: 10px !important;
     cursor: pointer;
     transition: all .25s ease;
-    box-shadow: 0 0 24px rgba(0,240,255,0.3);
+    box-shadow: 0 0 24px rgba(200,140,255,0.35);
 }
 .stButton > button:hover {
-    box-shadow: 0 0 40px rgba(0,240,255,0.55);
+    box-shadow: 0 0 40px rgba(220,160,255,0.6);
     transform: translateY(-2px);
 }
 
@@ -168,14 +171,14 @@ textarea:focus {
     font-family: 'Orbitron', monospace;
     font-size: 1.6rem;
     font-weight: 700;
-    color: #00f0ff;
+    color: #ffd700;
     line-height: 1;
 }
 .stat-label {
     font-size: .72rem;
     letter-spacing: .18em;
     text-transform: uppercase;
-    color: #4a90b8;
+    color: #9b72cf;
     margin-top: .35rem;
 }
 
@@ -186,9 +189,9 @@ textarea:focus {
     font-size: .6rem;
     letter-spacing: .2em;
     text-transform: uppercase;
-    color: #00c8ff;
-    background: rgba(0,200,255,0.08);
-    border: 1px solid rgba(0,200,255,0.2);
+    color: #c97bff;
+    background: rgba(160,80,255,0.10);
+    border: 1px solid rgba(200,140,255,0.22);
     border-radius: 6px;
     padding: .25rem .7rem;
     margin-bottom: 1.5rem;
@@ -200,10 +203,10 @@ textarea:focus {
     font-size: .72rem;
     letter-spacing: .15em;
     text-transform: uppercase;
-    color: #1e3a55;
+    color: #3a1a5a;
     margin-top: 2.5rem;
     padding-top: 1.5rem;
-    border-top: 1px solid rgba(0,240,255,0.07);
+    border-top: 1px solid rgba(180,100,255,0.10);
 }
 
 /* Plotly transparent bg */
