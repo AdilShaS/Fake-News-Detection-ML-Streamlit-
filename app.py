@@ -966,15 +966,19 @@ elif app_mode == "📜  History":
             cc1, cc2, cc3 = st.columns(3)
             with cc1:
                 st.plotly_chart(gauge_chart(entry["prob_real"], "Real Score", "#00ffaa"),
-                                use_container_width=True, config={"displayModeBar": False})
+                                use_container_width=True, config={"displayModeBar": False},
+                                key=f"hist_gauge_real_{i}")
             with cc2:
                 st.plotly_chart(gauge_chart(entry["prob_fake"], "Fake Score", "#ff3250"),
-                                use_container_width=True, config={"displayModeBar": False})
+                                use_container_width=True, config={"displayModeBar": False},
+                                key=f"hist_gauge_fake_{i}")
             with cc3:
                 st.plotly_chart(prob_bar(entry["prob_fake"], entry["prob_real"]),
-                                use_container_width=True, config={"displayModeBar": False})
+                                use_container_width=True, config={"displayModeBar": False},
+                                key=f"hist_probbar_{i}")
                 st.plotly_chart(radar_chart(entry["stats"]),
-                                use_container_width=True, config={"displayModeBar": False})
+                                use_container_width=True, config={"displayModeBar": False},
+                                key=f"hist_radar_{i}")
 
     st.markdown('<div class="footer">FakeShield · History</div>',
                 unsafe_allow_html=True)
