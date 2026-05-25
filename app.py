@@ -11,7 +11,7 @@ st.set_page_config(
     page_title="FakeShield · AI News Detector",
     page_icon="🛡️",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
 )
 
 # ── Shared CSS ─────────────────────────────────────────────────────────────────
@@ -35,69 +35,9 @@ html, body, [class*="css"] {
     background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%, 100% 100%;
 }
 [data-testid="stHeader"] { background: transparent; }
-/* ── Hide sidebar toggle & sidebar entirely ── */
-[data-testid="stSidebar"],
-[data-testid="collapsedControl"] { display: none !important; }
-
-/* ── Top navbar ── */
-.topnav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(14,6,24,0.92);
-    border-bottom: 1px solid rgba(180,120,255,0.18);
-    backdrop-filter: blur(16px);
-    padding: .65rem 2rem;
-    margin: -1rem -1rem 2rem -1rem;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    box-shadow: 0 4px 32px rgba(100,30,180,0.18);
-}
-.topnav-brand {
-    font-family: "Orbitron", monospace;
-    font-size: 1rem;
-    font-weight: 900;
-    letter-spacing: .18em;
-    background: linear-gradient(135deg, #ffd700, #c97bff);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    white-space: nowrap;
-}
-.topnav-links {
-    display: flex;
-    gap: .4rem;
-    align-items: center;
-}
-.topnav-pill {
-    font-family: "Orbitron", monospace;
-    font-size: .6rem;
-    letter-spacing: .18em;
-    text-transform: uppercase;
-    padding: .45rem 1.1rem;
-    border-radius: 999px;
-    border: 1px solid rgba(180,120,255,0.22);
-    color: #9b72cf;
-    background: transparent;
-    cursor: pointer;
-    transition: all .2s;
-    text-decoration: none;
-    white-space: nowrap;
-}
-.topnav-pill:hover { background: rgba(180,100,255,0.12); color: #e0b8ff; }
-.topnav-pill-active {
-    background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(180,100,255,0.15));
-    border-color: rgba(255,215,0,0.45);
-    color: #ffd700 !important;
-    box-shadow: 0 0 14px rgba(255,215,0,0.15);
-}
-.topnav-badge {
-    font-family: "Orbitron", monospace;
-    font-size: .52rem;
-    letter-spacing: .12em;
-    color: #5a3a7a;
-    white-space: nowrap;
+[data-testid="stSidebar"] {
+    background: rgba(14,6,24,0.97) !important;
+    border-right: 1px solid rgba(180,120,255,0.15) !important;
 }
 .hero-title {
     font-family: 'Orbitron', monospace;
@@ -447,39 +387,34 @@ def add_to_history(article, label, confidence, prob_real, prob_fake, stats):
 # ══════════════════════════════════════════════════════════════════════════════
 ensure_history()
 
-# ── Navbar rendered via query-param routing ──────────────────────────────────
-PAGES = ["🏠  Home", "🔍  Prediction", "📜  History"]
+st.sidebar.markdown("""
+<div style="text-align:center;padding:1.2rem 0 1rem">
+    <div style="font-family:'Orbitron',monospace;font-size:1.1rem;font-weight:900;
+                background:linear-gradient(135deg,#ffd700,#c97bff);
+                -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                letter-spacing:.15em">🛡 FAKESHIELD</div>
+    <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;
+                color:#5a3a7a;margin-top:.3rem">AI News Detector</div>
+</div>
+""", unsafe_allow_html=True)
 
-# Read current page from query params (default = Home)
-qp = st.query_params
-if "page" not in qp:
-    qp["page"] = "home"
+st.sidebar.markdown("---")
 
-_slug_map = {"home": "🏠  Home", "prediction": "🔍  Prediction", "history": "📜  History"}
-_rev_map  = {"🏠  Home": "home", "🔍  Prediction": "prediction", "📜  History": "history"}
-app_mode  = _slug_map.get(qp.get("page", "home"), "🏠  Home")
+app_mode = st.sidebar.selectbox(
+    "Navigate",
+    ["🏠  Home", "🔍  Prediction", "📜  History"],
+    label_visibility="collapsed",
+)
 
+# History count badge in sidebar
 history_count = len(st.session_state.prediction_history)
-
-def _pill(label, current):
-    slug   = _rev_map[label]
-    active = "topnav-pill-active" if label == current else ""
-    icon   = label.split("  ")[0]
-    name   = label.split("  ")[1]
-    # badge count on history pill
-    badge  = f' <span style="opacity:.6;font-size:.5rem">({history_count})</span>' if "History" in name else ""
-    return (f'<a href="?page={slug}" target="_self" ' 
-            f'class="topnav-pill {active}">{icon} {name}{badge}</a>')
-
-pills_html = "".join(_pill(p, app_mode) for p in PAGES)
-
-st.markdown(f'''
-<nav class="topnav">
-    <div class="topnav-brand">🛡&nbsp; FAKESHIELD</div>
-    <div class="topnav-links">{pills_html}</div>
-    <div class="topnav-badge">📜 {history_count} prediction{"s" if history_count != 1 else ""} this session</div>
-</nav>
-''', unsafe_allow_html=True)
+st.sidebar.markdown(
+    f"<div style='text-align:center;margin-top:.8rem;font-size:.72rem;"
+    f"color:#5a3a7a;letter-spacing:.1em'>"
+    f"📜 {history_count} prediction{'s' if history_count != 1 else ''} this session"
+    f"</div>",
+    unsafe_allow_html=True,
+)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -633,7 +568,7 @@ if app_mode == "🏠  Home":
     st.markdown("""
     <div style="text-align:center;margin:2rem 0 1rem">
         <div style="font-size:.85rem;color:#5a3a7a">
-            Use the <strong style="color:#ffd700">navbar</strong> above to navigate to
+            Use the <strong style="color:#ffd700">sidebar</strong> to navigate to
             <strong style="color:#c97bff">Prediction</strong> or
             <strong style="color:#c97bff">History</strong>.
         </div>
@@ -854,7 +789,7 @@ elif app_mode == "📜  History":
                 No predictions yet
             </div>
             <div style="font-size:.85rem;color:#5a3a7a;margin-top:.5rem">
-                Go to <strong style="color:#ffd700">Prediction</strong> in the navbar above
+                Go to <strong style="color:#ffd700">Prediction</strong> in the sidebar
                 and analyse your first article.
             </div>
         </div>""", unsafe_allow_html=True)
