@@ -633,7 +633,7 @@ if app_mode == "🏠  Home":
     st.markdown("""
     <div style="text-align:center;margin:2rem 0 1rem">
         <div style="font-size:.85rem;color:#5a3a7a">
-            Use the <strong style="color:#ffd700">sidebar</strong> to navigate to
+            Use the <strong style="color:#ffd700">navbar</strong> above to navigate to
             <strong style="color:#c97bff">Prediction</strong> or
             <strong style="color:#c97bff">History</strong>.
         </div>
@@ -854,7 +854,7 @@ elif app_mode == "📜  History":
                 No predictions yet
             </div>
             <div style="font-size:.85rem;color:#5a3a7a;margin-top:.5rem">
-                Go to <strong style="color:#ffd700">Prediction</strong> in the sidebar
+                Go to <strong style="color:#ffd700">Prediction</strong> in the navbar above
                 and analyse your first article.
             </div>
         </div>""", unsafe_allow_html=True)
